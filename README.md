@@ -1,6 +1,6 @@
 # Race Jimothy
 
-Draw anything and race Jimothy. A tiny Canvas game with synthesized sound effects.
+Draw anything and race Jimothy. A tiny Canvas game.
 
 ## Local preview
 
