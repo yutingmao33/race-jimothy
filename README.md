@@ -14,6 +14,6 @@ Open http://localhost:8000. Tests: `node regression.test.mjs` and `node sound.te
 
 Select **Settings → Pages → Source → GitHub Actions**. The included workflow tests and publishes `dist/` on each push to `main`.
 
-Public site URL after deployment: https://yutingmao33.github.io/race-jimothy/
+Public site URL after deployment: https://tayttm.github.io/race-jimothy/
 
 Fan-made, for fun.
