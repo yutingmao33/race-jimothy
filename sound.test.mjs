@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {createSound,footbeat} from './dist/sound.js';
+let voices=[];const param=()=>({setValueAtTime(){},linearRampToValueAtTime(){},exponentialRampToValueAtTime(){}});
+globalThis.AudioContext=class{state='running';currentTime=0;destination={};createGain(){return{gain:param(),connect(){},disconnect(){}}}createOscillator(){const v={frequency:{...param(),setValueAtTime(f){v.freq=f}},connect(){},disconnect(){},start(t){v.time=t},stop(){v.stopped=true}};voices.push(v);return v}};
+globalThis.document={hidden:false};globalThis.localStorage={getItem(){return null},setItem(){}};
+const s=createSound();s.click();assert.equal(voices.length,0);s.unlock();
+s.countdown(3);s.countdown(2);s.countdown(1);s.countdown(0);assert.equal(voices.length,5);
+voices=[];s.result(true);assert.ok(voices.every((v,i)=>!i||v.freq>voices[i-1].freq));assert.equal(voices.length,4);
+voices=[];s.result(false);assert.ok(voices.every((v,i)=>!i||v.freq<voices[i-1].freq));
+s.toggle();const n=voices.length;s.click(true);s.foot();assert.equal(voices.length,n);assert.ok(voices.every(v=>v.stopped));
+s.toggle();document.hidden=true;s.countdown(0);assert.equal(voices.length,n);
+assert.equal(footbeat({feet:[],cycle:.51},0),1);assert.equal(footbeat({cadence:2,hop:true},.26),1);
+console.log('PASS: gesture gating, countdown cues, ascending/descending melodies, mute, background silence, cadence synchronization.');
